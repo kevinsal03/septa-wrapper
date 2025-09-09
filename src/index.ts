@@ -8,10 +8,11 @@ import { septaAlert } from "./server/alerts.js";
 import { septaTrips } from "./server/trips.js";
 import { swaggerUI } from "@hono/swagger-ui";
 import { serveStatic } from "@hono/node-server/serve-static";
+import { ENV } from "./environment.js";
 
 const app = new Hono();
 
-const allowedHosts = ["localhost", "127.0.0.1"];
+const allowedHosts = ENV.ALLOWED_HOSTS;
 app.use(
   "*",
   cors({
@@ -48,14 +49,21 @@ app.get("/", (c) => {
   return c.text("SEPTA API Wrapper");
 });
 
-export const septaAPI = septaApiService();
+export const septaAPI = septaApiService({
+  // conditionally spread the environment vars or use the defaults specified in the api by not defining
+  ...(ENV.SEPTA_FLAT_API_BASE ? { flatBase: ENV.SEPTA_FLAT_API_BASE } : {}),
+  ...(ENV.SEPTA_STANDARD_API_BASE
+    ? { standardBase: ENV.SEPTA_STANDARD_API_BASE }
+    : {}),
+});
 
 serve(
   {
     fetch: app.fetch,
-    port: 3000,
+    port: ENV.PORT,
+    hostname: ENV.HOST,
   },
   (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
+    console.log(`Server is running on http://${info.address}:${info.port}`);
   },
 );

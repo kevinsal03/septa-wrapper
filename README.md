@@ -11,10 +11,12 @@ This project aims to improve the APIs usability by wrapping the official API wit
     - Install Node v22
     - Install pnpm
     - Run `pnpm install` to install project dependencies
-3. Boot the development server
-   `pnpm run dev` - This will install the TypeSpec compiler and compile the included Typespec file to OpenAPI YAML
-4. Access the Swagger UI shipped as part of the project at: `http://localhost:3000/docs`
-5. Try it out!
+3. Copy `sample.env` to `.env` and configure any options.
+   - *Nearly all options have defaults, but I still recommend copying this file*
+4. Boot the development server
+   `pnpm run dev` to install the TypeSpec compiler and compile the included Typespec file to OpenAPI YAML
+5. Access the Swagger UI shipped as part of the project at: `http://localhost:3000/docs`
+6. Try it out!
 
 The full spec is published at `http://localhost:3000/docs/api.openapi.yml` or `spec/tsp-output/schema/openapi.yaml`.
 
@@ -22,6 +24,5 @@ The full spec is published at `http://localhost:3000/docs/api.openapi.yml` or `s
 
 
 ## CORS and CORP
-Currently, CORS and CORP are hard coded to allow localhost in `src/index.ts`. If you need to allow another host, 
-modify the allowed hosts array.  
+Modify these options in your `.env`. They are provided by default as `localhost,127.0.0.1`.  
 **This is not production ready yet!**
