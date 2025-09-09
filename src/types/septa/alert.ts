@@ -20,6 +20,7 @@ export const SeptaAlertSchema = z.object({
     "MAINTENANCE",
     "UNKNOWN_CAUSE",
     "TECHNICAL_PROBLEM",
+    "POLICE_ACTIVITY",
   ]),
 
   effect: z.enum([
@@ -30,6 +31,7 @@ export const SeptaAlertSchema = z.object({
     "UNKNOWN_EFFECT",
     "REDUCED_SERVICE",
     "DETOUR",
+    "ADDITIONAL_SERVICE",
   ]),
 
   severity: z.enum(["SEVERE", "INFO", "UNKNOWN_SEVERITY", "WARNING"]),

@@ -151,6 +151,7 @@ enum AlertCause {
   MAINTENANCE,
   UNKNOWN_CAUSE,
   TECHNICAL_PROBLEM,
+  POLICE_ACTIVITY,
 }
 
 /**
@@ -164,6 +165,7 @@ enum AlertEffect {
   UNKNOWN_EFFECT,
   REDUCED_SERVICE,
   DETOUR,
+  ADDITIONAL_SERVICE,
 }
 
 /**
