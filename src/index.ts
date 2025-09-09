@@ -6,6 +6,8 @@ import { septaRoute } from "./server/route.js";
 import { septaAPI as septaApiService } from "./upstream-services/septa.js";
 import { septaAlert } from "./server/alerts.js";
 import { septaTrips } from "./server/trips.js";
+import { swaggerUI } from "@hono/swagger-ui";
+import { serveStatic } from "@hono/node-server/serve-static";
 
 const app = new Hono();
 
@@ -30,6 +32,13 @@ app.use(
 );
 app.use(appendTrailingSlash());
 app.use(trimTrailingSlash());
+
+app.use(
+  "/docs/api.openapi.yml",
+  serveStatic({ path: "./spec/tsp-output/schema/openapi.yaml" }),
+);
+// server swagger at /docs
+app.get("/docs", swaggerUI({ url: "/docs/api.openapi.yml" }));
 
 app.route("/routes", septaRoute);
 app.route("/alerts", septaAlert);
