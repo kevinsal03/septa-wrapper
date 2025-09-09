@@ -53,15 +53,14 @@ model FullRoute extends DetailedRoute {
  */
 alias FullRouteArray = FullRoute[];
 
-
 /**
  * The real-time status of a trip.
  */
 enum TripStatus {
-  "ON-TIME",
+  `ON-TIME`,
   LATE,
   EARLY,
-  "NO GPS",
+  `NO GPS`,
   CANCELED,
 }
 
@@ -71,6 +70,7 @@ enum TripStatus {
 model Trip {
   // --- Common Fields ---
   route_id: string;
+
   trip_id: string;
   trip_headsign: string;
   direction_id: int32;
@@ -109,14 +109,12 @@ model Trip {
   service_id?: string;
 
   start_time?: string;
-
   end_time?: string;
 
   // --- Bus/Trolley Fields ---
   trip_completion?: string | null;
 
   transit_date?: string;
-
   direction_name?: string;
 }
 
@@ -224,7 +222,7 @@ interface Alerts {
   @route("/{alert_id}")
   getById(
     @path
-    alert_id: string
+    alert_id: string,
   ): {
     @statusCode _: 200;
     @body body: SeptaAlert;
@@ -254,7 +252,7 @@ interface Routes {
   @route("/{route_id}")
   getById(
     @path
-    route_id: string
+    route_id: string,
   ): {
     @statusCode _: 200;
     @body body: DetailedRoute;
@@ -272,7 +270,7 @@ interface Routes {
   @route("/{route_id}/alerts")
   listAlertsForRoute(
     @path
-    route_id: string
+    route_id: string,
   ): {
     @statusCode _: 200;
     @body body: SeptaAlertArray;
@@ -287,7 +285,7 @@ interface Routes {
   @route("/{route_id}/trips")
   listTripsForRoute(
     @path
-    route_id: string
+    route_id: string,
   ): {
     @statusCode _: 200;
     @body body: TripArray;
