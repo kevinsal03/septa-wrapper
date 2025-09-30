@@ -164,6 +164,7 @@ enum AlertEffect {
   REDUCED_SERVICE,
   DETOUR,
   ADDITIONAL_SERVICE,
+  STOP_MOVED,
 }
 
 /**
