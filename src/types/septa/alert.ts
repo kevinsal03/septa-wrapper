@@ -32,6 +32,7 @@ export const SeptaAlertSchema = z.object({
     "REDUCED_SERVICE",
     "DETOUR",
     "ADDITIONAL_SERVICE",
+    "STOP_MOVED",
   ]),
 
   severity: z.enum(["SEVERE", "INFO", "UNKNOWN_SEVERITY", "WARNING"]),
